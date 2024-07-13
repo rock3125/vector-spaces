@@ -1,4 +1,4 @@
-## Rocks realtive vector spaces
+## Rock's relative vector spaces
 
 ![example plot 1](images/example1.jpg)
 
