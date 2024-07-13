@@ -1,4 +1,5 @@
 vectors-serialized.bin
 .idea
 venv
+__pycache__
 
