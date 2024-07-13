@@ -10,6 +10,7 @@ fig = plt.figure()
 
 # list of (word: string, vector_list: [float]) tuples
 # this is the higher dimensional space from a vector set
+# GPT2 size: 50,257 x 768
 def load_words():
     words = []
     if not os.path.exists('vectors-serialized.bin'):

@@ -5,7 +5,7 @@ import numpy
 
 #
 # download the GPT2 vectors
-# and create a vectors.txt and a vectors-serialized.bin file
+# and create a vectors-serialized.bin pickle file
 # containing the GPT2 word vectors: 50,257 x 768
 #
 if not os.path.exists('vectors-serialized.bin'):
