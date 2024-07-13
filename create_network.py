@@ -13,7 +13,7 @@ words = load_words()
 num_dims = 8
 
 # show a plot?
-show_plot = False
+show_plot = True
 
 # the words to pick for testing
 # ['worthy', '-worthy', 'and breathe', 'breathe', 'car', 'truck', 'respire', 'perspire', 'train']
@@ -25,8 +25,8 @@ if len(targets) == 0:
         targets.append(word[0])
 
 # cull
-if len(targets) > 1000:
-    targets = targets[:1000]
+if len(targets) > 100:
+    targets = targets[:100]
 
 # collect the distances we need for the simulation
 distance = dict()
