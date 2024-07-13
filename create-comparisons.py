@@ -26,24 +26,17 @@ else:
     with open('vectors-serialized.bin', 'rb') as reader:
         words = pickle.load(reader)
 
-if not os.path.exists('related.txt'):
-    with open('related.txt', 'wt') as writer:
+if not os.path.exists('distance.txt'):
+    with open('distance.txt', 'wt') as writer:
         counter = 0
-        for (word1, v1) in words:
+        diff_list = []
+        for i in range(0, len(words)):
+            word1 = words[i][0]
+            v1 = words[i][1]
             print("{:05d} {}".format(counter, word1))
-            diff_list = []
-            vp = numpy.dot(v1, v1)
-            for (word2, v2) in words:
-                if word1 != word2:
-                    vp = numpy.dot(v1, v2)
-                    diff_list.append((word2, vp))
-            diff_list.sort(key=lambda x: x[1])
-            diff_list.reverse()
-            # take the top 16
-            top_x_list = [word1]
-            for (item, score) in diff_list:
-                top_x_list.append("{},{:2.4}".format(item, score))
-                if len(top_x_list) >= top_x:
-                    break
-            writer.write(','.join(top_x_list) + '\n')
+            for j in range(i + 1, len(words)):
+                word2 = words[j][0]
+                v2 = words[j][1]
+                vp = numpy.dot(v1, v2)
+                writer.write("{},{},{}\n".format(word1, word2, vp))
             counter += 1
