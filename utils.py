@@ -2,6 +2,7 @@ import pickle
 import os
 import numpy
 import matplotlib.pyplot as plt
+import time
 
 # a figure to optionally show a plot in
 fig = plt.figure()
@@ -83,3 +84,9 @@ def plot(network, force_show):
 
     fig.canvas.draw()
     fig.canvas.flush_events()
+
+
+# current time in milliseconds
+def current_milli_time():
+    return round(time.time() * 1000)
+

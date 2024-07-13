@@ -1,4 +1,4 @@
-from utils import load_words, word_distance, key, plot
+from utils import load_words, word_distance, key, plot, current_milli_time
 import numpy
 
 # create a neural network like structure
@@ -11,10 +11,22 @@ words = load_words()
 
 # size of the neural network targets x num_dims
 num_dims = 8
-show_plot = True
+
+# show a plot?
+show_plot = False
 
 # the words to pick for testing
-targets = ['worthy', '-worthy', 'and breathe', 'breathe', 'car', 'truck', 'respire', 'perspire', 'train']
+# ['worthy', '-worthy', 'and breathe', 'breathe', 'car', 'truck', 'respire', 'perspire', 'train']
+targets = []
+
+# if targets above is empty, we calculate all words - slow and memory intensive
+if len(targets) == 0:
+    for word in words:
+        targets.append(word[0])
+
+# cull
+if len(targets) > 1000:
+    targets = targets[:1000]
 
 # collect the distances we need for the simulation
 distance = dict()
@@ -49,11 +61,15 @@ stop_distance = 0.01
 num_changes = 1
 # iteration counter
 counter = 0
+# time for display every so many seconds
+t0 = current_milli_time()
 # each round, the biggest distance between two points
 biggest_dist = 0.0
 while num_changes > 0:
 
-    if counter % 100 == 0:
+    t1 = current_milli_time()
+    if counter % 100 == 0 or t1 - t0 >= 30_000:
+        t0 = t1
         print("iter {}, changes {}, delta {}".format(counter, num_changes, biggest_dist))
         if show_plot:
             plot(network, False)
@@ -62,7 +78,7 @@ while num_changes > 0:
     counter += 1
     num_changes = 0
     for i in range(0, len(targets)):
-        for j in range(1, len(targets)):
+        for j in range(i + 1, len(targets)):
             if i != j:
                 # this is what they should be at
                 required_dist = distance[key(i, j)]
