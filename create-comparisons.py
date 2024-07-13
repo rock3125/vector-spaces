@@ -1,30 +1,9 @@
 import os
-import pickle
 import numpy
 
-# list of (word: string, vector_list: [float]) tuples
-words = []
-if not os.path.exists('vectors-serialized.bin'):
-    with open('vectors.txt', 'rt') as reader:
-        for line in reader.readlines():
-            line = line.strip()
-            parts = line.split('[')
-            if len(parts) == 2:
-                word = parts[0].strip()
-                vector_str = parts[1].strip()[0:-1]
-                vector_list = []
-                for v in vector_str.split(','):
-                    v = float(v.strip())
-                    vector_list.append(v)
-                vector_list = vector_list / numpy.linalg.norm(vector_list)
-                words.append((word, vector_list))
+from utils import load_words
 
-    with open('vectors-serialized.bin', 'wb') as writer:
-        pickle.dump(words, writer)
-else:
-    with open('vectors-serialized.bin', 'rb') as reader:
-        words = pickle.load(reader)
-
+words = load_words()
 if not os.path.exists('distance.txt'):
     with open('distance.txt', 'wt') as writer:
         counter = 0
