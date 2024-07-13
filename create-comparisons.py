@@ -2,8 +2,7 @@ import os
 import pickle
 import numpy
 
-top_x = 16
-
+# list of (word: string, vector_list: [float]) tuples
 words = []
 if not os.path.exists('vectors-serialized.bin'):
     with open('vectors.txt', 'rt') as reader:
