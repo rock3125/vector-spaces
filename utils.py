@@ -1,9 +1,14 @@
 import pickle
 import os
 import numpy
+import matplotlib.pyplot as plt
+
+# a figure to optionally show a plot in
+fig = plt.figure()
 
 
 # list of (word: string, vector_list: [float]) tuples
+# this is the higher dimensional space from a vector set
 def load_words():
     words = []
     if not os.path.exists('vectors-serialized.bin'):
@@ -50,6 +55,7 @@ def word_distance(word1, word2, words):
     return 1.0 - numpy.dot(v1, v2)
 
 
+# arrange index 1 and index 2 < and return them as a string index for a dict()
 def key(i1, i2):
     if i1 < i2:
         return "{}:{}".format(str(i1), str(i2))
@@ -57,7 +63,10 @@ def key(i1, i2):
         return "{}:{}".format(str(i2), str(i1))
 
 
-def plot(fig, network):
+# plot the entire network, creating a new plot
+def plot(network, force_show):
+    if force_show:
+        fig.show()
     fig.clear()
     ax = fig.add_subplot(projection='3d')
     # Make legend, set axes limits and labels
