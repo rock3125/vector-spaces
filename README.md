@@ -23,4 +23,4 @@ the experiment using only 3 dimension (n=3), here we get an orbiting effect wher
 
 
 ![example plot 2](images/example2.jpg)
-more points in 8 dimensions (n=8), still only using 100s of vectors (slow compute in pure python), but the system does converge for that many points and the delta (error rate) drops until we are satisfied.
+more points in 8 dimensions (n=8, plotting only the first 3 of each point), still only using 100s of vectors (slow compute in pure python), but the system does converge for that many points and the delta (error rate) drops until we are satisfied.
