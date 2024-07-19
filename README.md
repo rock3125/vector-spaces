@@ -7,6 +7,7 @@ An attempt at scaling cognitive vector in lower dimensional spaces and exploring
   - put each vector randomly into an n-dimension space (n=8)
   - using a small step "learning rate" move each vector a little bit each time to re-create their required distances
     in order to re-create the distances of the original vector set
+- we an already see that 3- and 4- dimensions can't converge even a smaller subset of the vectors (i.e. the kissing numbers / Newton numbers) can't fit the constraints.
 
 
 *todo*: lots 
